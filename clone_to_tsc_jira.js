@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TSC Jira
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  try to take over the world!
 // @author       You
 // @match        https://jira.cvte.com/*
@@ -36,6 +36,7 @@ function cloneJira(){
                 "customfield_12804": {"value": "软件平台"},
                 "duedate":dueDate,
                 'assignee': {'name': getJiraUser()},
+                "labels" : ["技术支持自动复制"]
             }
         }),
         onload: function(response) {
