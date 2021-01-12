@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TSC Jira
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://jira.cvte.com/*
@@ -227,7 +227,7 @@ function getJiraUser() {
 
 function getCurJiraKey(){
     const assigneeEle = document.getElementsByClassName("issue-link");
-    return assigneeEle[0].innerText;
+    return assigneeEle[0].getAttribute("data-issue-key");
 }
 
 function getCurJiraSummary(){
