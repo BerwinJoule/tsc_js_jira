@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         TSC Jira
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://jira.cvte.com/*
+// @match        https://jira.cvte.com/browse/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_openInTab
 // @connect      *
