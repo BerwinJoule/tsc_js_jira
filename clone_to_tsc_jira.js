@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TSC Jira
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  try to take over the world!
 // @author       You
 // @match        https://jira.cvte.com/*
@@ -179,7 +179,7 @@ function closeJira(JiraID){
         onload: function(response) {
             console.log(this.name + "结果:" + response.responseText);
             GM_openInTab(jiraPrefix + JiraID);
-            //location.reload();
+            location.reload();
         }
     });
 }
