@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name         TSC Jira
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  try to take over the world!
 // @author       You
-// @match        https://jira.cvte.com/browse/*
+// @match        https://jira.cvte.com/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_openInTab
 // @connect      *
 // ==/UserScript==
-var jiraPrefix = 'https://jira.cvte.com/browse/'
-var jiraCommonPrefix = 'https://'+document.domain
+var jiraPrefix = 'https://jira.cvte.com/browse/';
+var jiraCommonPrefix = 'https://'+document.domain;
+var startTimer;
 
 function cloneJira(){
     var dueDate = new Date();
@@ -258,12 +259,31 @@ function getCurJiraDescription(){
     return assigneeEle.textContent;
 }
 
-(function() {
+function start() {
+    var isButton = document.getElementById("clone_tcs_button");
+    clearInterval(startTimer);
+    if(document.documentURI.indexOf(jiraPrefix) == -1){
+        console.log("not browse page, exit");
+        return
+    }
+    if(isButton!=null){
+        console.log("already exist, exit");
+        return
+    }
     var cloneJiraButton = document.createElement('button');
     var parent = document.getElementsByClassName("aui-toolbar2-primary");
     cloneJiraButton.addEventListener("click", cloneJira);
     cloneJiraButton.innerText = '复制到TVS';
     cloneJiraButton.className = "aui-button toolbar-trigger";
+    cloneJiraButton.id = "clone_tcs_button";
     parent[0].appendChild(cloneJiraButton);
+}
+
+(function() {
+    startTimer = setInterval(start,1000);
+    document.body.addEventListener('click', function() {
+        clearInterval(startTimer);
+        startTimer = setInterval(start, 1000);
+    })
 })();
 
