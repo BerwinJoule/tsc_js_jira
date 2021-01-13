@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TSC Jira
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.7
 // @description  try to take over the world!
 // @author       You
 // @match        https://jira.cvte.com/*
@@ -239,6 +239,9 @@ function getCurJiraSummary(){
 
 function getCurJiraDifficulty(){
     const assigneeEle = document.getElementById("customfield_11110-val");
+    if(assigneeEle == null){
+        return "EMPTY";
+    }
     var jiraDifficulty = assigneeEle.textContent.trim();
     console.log("getCurJiraDifficulty: " + jiraDifficulty);
     return jiraDifficulty;
@@ -247,7 +250,7 @@ function getCurJiraDifficulty(){
 function getCurJiraSpendTime(){
     const assigneeEle = document.getElementById("customfield_12810-val");
     if(assigneeEle == null){
-        return 0
+        return 0;
     }
     var jiraSpendTime = assigneeEle.textContent.trim();
     console.log("getCurJiraDifficulty: " + jiraSpendTime);
